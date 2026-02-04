@@ -15,12 +15,6 @@ Examples include:
 """
 
 import numpy as np
-from pathlib import Path
-import sys
-
-# Add n4crops parent directory to path for imports
-# examples is inside n4crops, so we go up two levels to reach N4Maize
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from n4crops import (
     HyperspectralIndices,

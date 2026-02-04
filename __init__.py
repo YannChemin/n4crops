@@ -23,12 +23,12 @@ References:
 5. Xue, L., et al. (2004). Monitoring leaf nitrogen status in rice with canopy
    spectral reflectance. Agron. J. 96, 135-142.
 
-Author: Generated for N4Maize project
+Author: N4Crops Project
 License: MIT
 """
 
 __version__ = "1.0.0"
-__author__ = "N4Maize Project"
+__author__ = "N4Crops Project"
 
 from .indices import HyperspectralIndices
 from .processor import NitrogenProcessor

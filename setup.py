@@ -13,30 +13,25 @@ With GDAL (recommended via conda):
 from setuptools import setup, find_packages
 from pathlib import Path
 
-# Get the directory containing setup.py (n4crops folder)
+# Get the directory containing setup.py
 here = Path(__file__).parent.resolve()
 
-# Read README from parent directory (N4Maize)
-readme_path = here.parent / "README.md"
+# Read README
+readme_path = here / "README.md"
 if readme_path.exists():
     long_description = readme_path.read_text()
 else:
-    # Try local README
-    local_readme = here / "README.md"
-    if local_readme.exists():
-        long_description = local_readme.read_text()
-    else:
-        long_description = "N4Crops: Nitrogen Content Estimation from Hyperspectral Remote Sensing"
+    long_description = "N4Crops: Nitrogen Content Estimation from Hyperspectral Remote Sensing"
 
 setup(
     name="n4crops",
     version="1.0.0",
-    author="N4Maize Project",
+    author="N4Crops Project",
     author_email="",
     description="Nitrogen content estimation in crops from hyperspectral imagery",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/N4Maize",
+    url="https://github.com/yourusername/n4crops",
     packages=find_packages(where="."),
     package_dir={"": "."},
     classifiers=[
