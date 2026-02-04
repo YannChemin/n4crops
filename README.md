@@ -243,24 +243,7 @@ n4crops/
 
 ## License
 
-MIT License
-
-## Citation
-
-If you use this software in your research, please cite:
-
-```bibtex
-@article{olson2022hyperspectral,
-  title={Hyperspectral Indices for Predicting Nitrogen Use Efficiency in Maize Hybrids},
-  author={Olson, Monica B and Crawford, Melba M and Vyn, Tony J},
-  journal={Remote Sensing},
-  volume={14},
-  number={7},
-  pages={1721},
-  year={2022},
-  publisher={MDPI}
-}
-```
+Unlicense
 
 ## Contributing
 
