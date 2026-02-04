@@ -31,7 +31,7 @@ setup(
     description="Nitrogen content estimation in crops from hyperspectral imagery",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/n4crops",
+    url="https://github.com/yannchemin/n4crops",
     packages=find_packages(where="."),
     package_dir={"": "."},
     classifiers=[

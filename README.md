@@ -38,7 +38,7 @@ conda install -c conda-forge gdal
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/n4crops.git
+git clone https://github.com/yannchemin/n4crops.git
 cd n4crops
 
 # Install in development mode
