@@ -147,7 +147,7 @@ class CropCalibration:
                     'rmse': 5.2,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (-0.2, 0.2),
+                    'valid_range': (40.0, 60.0),
                 },
                 'pN': {
                     'index': 'HBCI8',
@@ -157,7 +157,7 @@ class CropCalibration:
                     'rmse': 0.06,
                     'units': '%',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (-0.2, 0.2),
+                    'valid_range': (0.8, 1.2),
                 },
             },
             # R1 stage models (most validated)
@@ -165,52 +165,52 @@ class CropCalibration:
                 'NCE': {
                     'index': 'HBSI1',
                     'model_type': 'linear',
-                    'coefficients': {'slope': 5.56e-6, 'intercept': 107.0},
-                    'r_squared': 0.68,
+                    'coefficients': {'slope': 107.0, 'intercept': 0.0},
+                    'r_squared': 0.67,
                     'rmse': 14.4,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (0.3, 0.9),
+                    'valid_range': (60.0, 150.0),
                 },
                 'NCE_HBSI2': {
                     'index': 'HBSI2',
                     'model_type': 'linear',
-                    'coefficients': {'slope': 5.17e-6, 'intercept': 107.0},
-                    'r_squared': 0.67,
+                    'coefficients': {'slope': 107.0, 'intercept': 0.0},
+                    'r_squared': 0.68,
                     'rmse': 14.4,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (0.3, 0.9),
+                    'valid_range': (60.0, 150.0),
                 },
                 'NIE': {
                     'index': 'HBCI8',
                     'model_type': 'linear',
-                    'coefficients': {'slope': 1.76, 'intercept': 51.0},
-                    'r_squared': 0.84,
-                    'rmse': 5.0,
-                    'units': 'kg kg⁻¹ N',
-                    'reference': 'Olson et al. (2022)',
-                    'valid_range': (-0.2, 0.2),
-                },
-                'NIE_HBCI9': {
-                    'index': 'HBCI9',
-                    'model_type': 'linear',
-                    'coefficients': {'slope': 4.28, 'intercept': 51.0},
+                    'coefficients': {'slope': 52.0, 'intercept': 0.0},
                     'r_squared': 0.67,
                     'rmse': 5.0,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (-0.1, 0.3),
+                    'valid_range': (20.0, 40.0),
+                },
+                'NIE_HBCI9': {
+                    'index': 'HBCI9',
+                    'model_type': 'linear',
+                    'coefficients': {'slope': 55.0, 'intercept': 0.0},
+                    'r_squared': 0.84,
+                    'rmse': 5.0,
+                    'units': 'kg kg⁻¹ N',
+                    'reference': 'Olson et al. (2022)',
+                    'valid_range': (20.0, 45.0),
                 },
                 'pN': {
                     'index': 'HREI16',
                     'model_type': 'linear',
-                    'coefficients': {'slope': 0.263, 'intercept': 0.78},
-                    'r_squared': 0.64,
+                    'coefficients': {'slope': 0.9, 'intercept': 0.0},
+                    'r_squared': 0.72,
                     'rmse': 0.11,
                     'units': '%',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (0.4, 0.8),
+                    'valid_range': (0.8, 2.5),
                 },
             },
             # R2 stage models
@@ -223,7 +223,7 @@ class CropCalibration:
                     'rmse': 15.0,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (0.3, 0.9),
+                    'valid_range': (100.0, 110.0),
                 },
                 'NIE': {
                     'index': 'HBCI9',
@@ -233,7 +233,7 @@ class CropCalibration:
                     'rmse': 5.5,
                     'units': 'kg kg⁻¹ N',
                     'reference': 'Olson et al. (2022)',
-                    'valid_range': (-0.1, 0.3),
+                    'valid_range': (45.0, 55.0),
                 },
             },
             # Generic vegetative stage
@@ -280,7 +280,7 @@ class CropCalibration:
                     'rmse': 0.25,
                     'units': '%',
                     'reference': 'Xue et al. (2004)',
-                    'valid_range': (2.0, 12.0),
+                    'valid_range': (0.05, 5.0),
                 },
                 'plant_N': {
                     'index': 'GNDVI',
@@ -302,7 +302,7 @@ class CropCalibration:
                     'rmse': 0.22,
                     'units': '%',
                     'reference': 'Tian et al. (2011)',
-                    'valid_range': (0.15, 0.55),
+                    'valid_range': (1.5, 4.5),
                 },
                 'N_uptake': {
                     'index': 'MTCI',
@@ -324,7 +324,7 @@ class CropCalibration:
                     'rmse': 0.28,
                     'units': '%',
                     'reference': 'Tian et al. (2011)',
-                    'valid_range': (-0.15, 0.05),
+                    'valid_range': (1.0, 3.0),
                 },
                 'grain_N': {
                     'index': 'GNDVI',
@@ -334,7 +334,7 @@ class CropCalibration:
                     'rmse': 0.15,
                     'units': '%',
                     'reference': 'Estimated from literature',
-                    'valid_range': (0.25, 0.75),
+                    'valid_range': (1.0, 2.0),
                 },
             },
             'filling': {
@@ -346,7 +346,7 @@ class CropCalibration:
                     'rmse': 0.8,
                     'units': '%',
                     'reference': 'Estimated from literature',
-                    'valid_range': (0.1, 0.5),
+                    'valid_range': (6.0, 12.0),
                 },
             },
             # Generic stages
@@ -405,7 +405,7 @@ class CropCalibration:
                     'rmse': 18.0,
                     'units': 'kg ha⁻¹',
                     'reference': 'Feng et al. (2016)',
-                    'valid_range': (0.1, 0.8),
+                    'valid_range': (10.0, 200.0),
                 },
                 'NNI': {
                     'index': 'Wheat_CCCI',
@@ -459,7 +459,7 @@ class CropCalibration:
                     'rmse': 1.0,
                     'units': '%',
                     'reference': 'Hansen & Schjoerring (2003)',
-                    'valid_range': (0.15, 0.45),
+                    'valid_range': (8.0, 15.0),
                 },
             },
             'grain_fill': {
@@ -471,7 +471,7 @@ class CropCalibration:
                     'rmse': 0.20,
                     'units': '%',
                     'reference': 'Feng et al. (2016)',
-                    'valid_range': (0.1, 0.4),
+                    'valid_range': (1.0, 2.0),
                 },
             },
             # Generic stages
@@ -566,33 +566,34 @@ class CropCalibration:
         coeffs = model_info['coefficients']
         valid_range = model_info.get('valid_range', (-np.inf, np.inf))
 
-        # Clip to valid range
-        x = np.clip(index_values, valid_range[0], valid_range[1])
-
+        # Apply model
         if model_type == 'linear':
             # y = slope * x + intercept
-            result = coeffs['slope'] * x + coeffs['intercept']
+            result = coeffs['slope'] * index_values + coeffs['intercept']
 
         elif model_type == 'polynomial':
             # y = a2*x^2 + a1*x + a0
-            result = (coeffs.get('a2', 0) * x**2 +
-                      coeffs.get('a1', 0) * x +
+            result = (coeffs.get('a2', 0) * index_values**2 +
+                      coeffs.get('a1', 0) * index_values +
                       coeffs.get('a0', 0))
 
         elif model_type == 'exponential':
             # y = a * exp(b * x)
-            result = coeffs['a'] * np.exp(coeffs['b'] * x)
+            result = coeffs['a'] * np.exp(coeffs['b'] * index_values)
 
         elif model_type == 'power':
             # y = a * x^b
-            result = coeffs['a'] * np.power(np.maximum(x, 0.001), coeffs['b'])
+            result = coeffs['a'] * np.power(np.maximum(index_values, 0.001), coeffs['b'])
 
         elif model_type == 'logarithmic':
             # y = a * ln(x) + b
-            result = coeffs['a'] * np.log(np.maximum(x, 0.001)) + coeffs['b']
+            result = coeffs['a'] * np.log(np.maximum(index_values, 0.001)) + coeffs['b']
 
         else:
             raise ValueError(f"Unknown model type: {model_type}")
+
+        # Clip result to valid range (applied to output, not input)
+        result = np.clip(result, valid_range[0], valid_range[1])
 
         return result
 

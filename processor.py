@@ -33,8 +33,12 @@ except ImportError:
     GDAL_AVAILABLE = False
     warnings.warn("GDAL not available. Some functionality will be limited.")
 
-from .indices import HyperspectralIndices
-from .calibration import CropCalibration, CropType
+try:
+    from .indices import HyperspectralIndices
+    from .calibration import CropCalibration, CropType
+except ImportError:
+    from indices import HyperspectralIndices
+    from calibration import CropCalibration, CropType
 
 
 @dataclass
