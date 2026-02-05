@@ -12,20 +12,20 @@ This package implements vegetation indices and calibration models from peer-revi
 - **Plant N content**: whole-plant nitrogen concentration (%)
 - **NNI** (Nitrogen Nutrition Index): crop nitrogen status indicator
 
-## 🚀 Recent Improvements
+##  Recent Improvements
 
 ### **Critical Bug Fixes (2025-02-05)**
-- ✅ **Fixed systematic calibration model errors** affecting 22 models
-- ✅ **Corrected input vs output clipping mechanism** in `apply_model()`
-- ✅ **Updated all valid ranges** based on peer-reviewed literature
-- ✅ **Added automated validation framework** for model quality assurance
-- ✅ **97% validation pass rate** (32 out of 33 models now functional)
+-  **Fixed systematic calibration model errors** affecting 22 models
+-  **Corrected input vs output clipping mechanism** in `apply_model()`
+-  **Updated all valid ranges** based on peer-reviewed literature
+-  **Added automated validation framework** for model quality assurance
+-  **97% validation pass rate** (32 out of 33 models now functional)
 
 ### **Enhanced Features**
-- 📊 **Automated model validation** with `validate_calibration.py`
-- 🔍 **Comprehensive error detection** and quality control
-- 📚 **Literature-based parameter ranges** for all crops and stages
-- 🛡️ **Robust error handling** for edge cases (bare soil, water bodies)
+-  **Automated model validation** with `validate_calibration.py`
+-  **Comprehensive error detection** and quality control
+-  **Literature-based parameter ranges** for all crops and stages
+-  **Robust error handling** for edge cases (bare soil, water bodies)
 
 ## Key References
 
