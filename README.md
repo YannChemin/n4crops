@@ -188,6 +188,276 @@ wheat_indices = hsi.get_wheat_n_indices(image)
 | Leaf N | Jointing | NDRE | Hansen & Schjoerring (2003) |
 | NNI | Various | CCCI | Zhao et al. (2018) |
 
+## Rice Development Stage Examples
+
+The following examples show how to process rice images at different growth stages. Each stage provides specific nitrogen parameters relevant to that development phase.
+
+### Rice Tillering Stage
+
+**Optimal timing**: 15-30 days after transplanting (early vegetative growth)
+
+```bash
+# Command line
+python main.py -i rice_tillering.tif -o output_tillering/ -c rice -s tillering
+
+# Expected outputs:
+# - N_leaf_N.tif: Leaf nitrogen content (0.05-5.0%)
+# - N_plant_N.tif: Whole plant nitrogen content (0.3-1.5%)
+```
+
+```python
+# Python API
+from n4crops import NitrogenProcessor, ProcessingConfig
+
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="tillering",
+    apply_soil_mask=True,
+    soil_ndvi_threshold=0.2  # Lower threshold for early season
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_tillering.tif", "output_tillering/")
+```
+
+### Rice Booting Stage
+
+**Optimal timing**: 30-45 days after transplanting (stem elongation)
+
+```bash
+# Command line
+python main.py -i rice_booting.tif -o output_booting/ -c rice -s booting
+
+# Expected outputs:
+# - N_leaf_N.tif: Leaf nitrogen content (1.5-4.5%)
+# - N_uptake.tif: Nitrogen uptake (10-200 kg ha⁻¹)
+```
+
+```python
+# Python API with custom masking for booting stage
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="booting",
+    apply_soil_mask=True,
+    soil_ndvi_threshold=0.3  # Moderate threshold for active growth
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_booting.tif", "output_booting/")
+```
+
+### Rice Heading Stage
+
+**Optimal timing**: 45-60 days after transplanting (panicle emergence)
+
+```bash
+# Command line
+python main.py -i rice_heading.tif -o output_heading/ -c rice -s heading
+
+# Expected outputs:
+# - N_leaf_N.tif: Leaf nitrogen content (1.0-3.0%)
+# - N_grain_N.tif: Grain nitrogen content (1.0-2.0%)
+```
+
+```python
+# Python API with all indices for heading stage
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="heading",
+    apply_soil_mask=True,
+    soil_ndvi_threshold=0.4,  # Higher threshold for dense canopy
+    calculate_all_indices=True  # Get all vegetation indices
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_heading.tif", "output_heading/")
+```
+
+### Rice Filling Stage
+
+**Optimal timing**: 60-80 days after transplanting (grain development)
+
+```bash
+# Command line
+python main.py -i rice_filling.tif -o output_filling/ -c rice -s filling
+
+# Expected outputs:
+# - N_grain_protein.tif: Grain protein content (6.0-12.0%)
+```
+
+```python
+# Python API for grain quality assessment
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="filling",
+    apply_soil_mask=True,
+    soil_ndvi_threshold=0.35  # Moderate threshold for maturing canopy
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_filling.tif", "output_filling/")
+```
+
+### Rice Vegetative Stage
+
+**Use case**: Generic early-stage analysis when exact stage unknown
+
+```bash
+# Command line
+python main.py -i rice_vegetative.tif -o output_veg/ -c rice -s vegetative
+
+# Expected outputs:
+# - N_leaf_N.tif: Leaf nitrogen content (1.0-4.0%)
+```
+
+```python
+# Python API for general vegetative analysis
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="vegetative",
+    apply_soil_mask=False,  # No masking for heterogeneous fields
+    calculate_all_indices=True
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_vegetative.tif", "output_veg/")
+```
+
+### Rice Reproductive Stage
+
+**Use case**: Late-stage analysis focusing on grain quality
+
+```bash
+# Command line
+python main.py -i rice_reproductive.tif -o output_repr/ -c rice -s reproductive
+
+# Expected outputs:
+# - N_content.tif: Total nitrogen content (1.5-5.0%)
+```
+
+```python
+# Python API for reproductive stage analysis
+config = ProcessingConfig(
+    crop_type="rice",
+    growth_stage="reproductive",
+    apply_soil_mask=True,
+    soil_ndvi_threshold=0.3
+)
+
+processor = NitrogenProcessor(config)
+results = processor.process("rice_reproductive.tif", "output_repr/")
+```
+
+### Batch Processing All Rice Stages
+
+**Use case**: Complete season analysis with multiple images
+
+```python
+from n4crops import NitrogenProcessor, ProcessingConfig
+import glob
+
+# Define stages and corresponding files
+stages = {
+    'tillering': 'rice_tillering_*.tif',
+    'booting': 'rice_booting_*.tif', 
+    'heading': 'rice_heading_*.tif',
+    'filling': 'rice_filling_*.tif'
+}
+
+# Process each stage
+for stage, pattern in stages.items():
+    config = ProcessingConfig(
+        crop_type="rice",
+        growth_stage=stage,
+        apply_soil_mask=True,
+        soil_ndvi_threshold=0.3
+    )
+    
+    processor = NitrogenProcessor(config)
+    
+    # Process all images for this stage
+    for image_file in glob.glob(pattern):
+        output_dir = f"batch_output/{stage}/"
+        results = processor.process(image_file, output_dir)
+        print(f"Processed {image_file} -> {output_dir}")
+```
+
+### Seasonal Analysis Workflow
+
+**Complete rice season nitrogen monitoring**
+
+```python
+from n4crops import NitrogenProcessor, ProcessingConfig
+from datetime import datetime
+import os
+
+def process_rice_season(image_files, dates, base_output_dir):
+    """
+    Process rice images throughout the growing season
+    
+    Parameters:
+    -----------
+    image_files : list
+        List of image file paths
+    dates : list
+        List of corresponding dates (datetime objects)
+    base_output_dir : str
+        Base directory for outputs
+    """
+    
+    # Sort by date
+    sorted_data = sorted(zip(dates, image_files))
+    
+    for date, image_file in sorted_data:
+        # Determine growth stage based on date
+        days_since_planting = (date - start_date).days
+        
+        if days_since_planting <= 30:
+            stage = 'tillering'
+            threshold = 0.2
+        elif days_since_planting <= 45:
+            stage = 'booting'
+            threshold = 0.3
+        elif days_since_planting <= 60:
+            stage = 'heading'
+            threshold = 0.4
+        else:
+            stage = 'filling'
+            threshold = 0.35
+            
+        # Configure processing
+        config = ProcessingConfig(
+            crop_type="rice",
+            growth_stage=stage,
+            apply_soil_mask=True,
+            soil_ndvi_threshold=threshold
+        )
+        
+        processor = NitrogenProcessor(config)
+        
+        # Create stage-specific output directory
+        output_dir = os.path.join(base_output_dir, stage, date.strftime('%Y-%m-%d'))
+        
+        # Process image
+        results = processor.process(image_file, output_dir)
+        print(f"{date.strftime('%Y-%m-%d')}: {stage} stage -> {output_dir}")
+
+# Example usage
+start_date = datetime(2025, 6, 1)  # Planting date
+image_files = ['image_2025-06-15.tif', 'image_2025-07-01.tif', 'image_2025-07-20.tif']
+dates = [datetime(2025, 6, 15), datetime(2025, 7, 1), datetime(2025, 7, 20)]
+
+process_rice_season(image_files, dates, "season_analysis/")
+```
+
+### Tips for Rice Processing
+
+1. **Early Season (Tillering)**: Use lower NDVI threshold (0.2) due to sparse canopy
+2. **Peak Season (Heading)**: Use higher threshold (0.4) for dense vegetation
+3. **Water Management**: Consider using `--no-mask` for flooded rice fields
+4. **Quality Control**: Always check NDVI statistics before processing
+5. **Validation**: Use `validate_calibration.py` to ensure models are working correctly
+
 ## Adding Custom Calibration Models
 
 ```python
